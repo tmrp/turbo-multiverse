@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/vue", "destination": "/index.html" },
+    { "source": "/vue/", "destination": "/index.html" },
+    { "source": "/vue/:path*", "destination": "/:path*" }
+  ]
+}

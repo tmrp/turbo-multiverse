@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/svelte", "destination": "/index.html" },
+    { "source": "/svelte/", "destination": "/index.html" },
+    { "source": "/svelte/:path*", "destination": "/:path*" }
+  ]
+}

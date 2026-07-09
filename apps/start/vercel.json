@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/start/assets/:path*",
+      "destination": "/assets/:path*"
+    },
+    {
+      "source": "/start/favicon.ico",
+      "destination": "/favicon.ico"
+    }
+  ]
+}

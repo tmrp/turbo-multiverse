@@ -1,0 +1,56 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "VERCEL_ENV",
+    "VERCEL_URL",
+    "VERCEL_BRANCH_URL",
+    "VERCEL_TOKEN",
+    "VERCEL_TEAM_ID",
+    "VERCEL_GIT_COMMIT_REF",
+    "VERCEL_PROJECT_PREFIX",
+    "VERCEL_AUTOMATION_BYPASS_SECRET",
+    "WEB_ORIGIN",
+    "NEXT_ORIGIN",
+    "VITE_ORIGIN",
+    "START_ORIGIN",
+    "VUE_ORIGIN",
+    "SVELTE_ORIGIN",
+    "API_ORIGIN",
+    "WEB_PROJECT_ID",
+    "NEXT_PROJECT_ID",
+    "VITE_PROJECT_ID",
+    "START_PROJECT_ID",
+    "VUE_PROJECT_ID",
+    "SVELTE_PROJECT_ID",
+    "API_PROJECT_ID"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/dev/**",
+        "dist/**",
+        ".output/**",
+        ".nitro/**",
+        ".tanstack/**",
+        ".astro/**",
+        ".vercel/**"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

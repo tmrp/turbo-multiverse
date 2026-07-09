@@ -1,0 +1,64 @@
+---
+import {
+  API_DEMO_SCRIPT,
+  appPath,
+  getAppById,
+  GITHUB_URL,
+  ROOT_APP,
+  SITE_APPS,
+  SITE_NAME,
+  SITE_STYLES,
+} from "@repo/site-config";
+
+interface Props {
+  appId: string;
+}
+
+const { appId } = Astro.props;
+const app = getAppById(appId);
+
+if (!app) {
+  throw new Error(`Unknown app id: ${appId}`);
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{app.name} · {SITE_NAME}</title>
+    <style is:inline set:html={SITE_STYLES}></style>
+  </head>
+  <body style={`--accent: ${app.accent}`}>
+    <header class="site-header">
+      <a class="site-brand" href={appPath(ROOT_APP)}>
+        <span class="site-brand-dot"></span>{SITE_NAME}
+      </a>
+      <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub</a>
+      <nav class="site-nav">
+        {
+          SITE_APPS.map((navApp) => (
+            <a
+              href={appPath(navApp)}
+              aria-current={navApp.id === app.id ? "page" : undefined}
+            >
+              {navApp.name}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      {SITE_NAME} — one site, many frameworks. This page is served by {
+        app.framework
+      }. <a href={GITHUB_URL} target="_blank" rel="noreferrer">
+        Source on GitHub
+      </a>
+    </footer>
+    <script is:inline set:html={API_DEMO_SCRIPT}></script>
+  </body>
+</html>

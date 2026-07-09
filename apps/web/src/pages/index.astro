@@ -1,0 +1,58 @@
+---
+import { appPath, getAppById, SITE_APPS } from "@repo/site-config";
+
+import Shell from "../components/Shell.astro";
+
+const app = getAppById("web")!;
+---
+
+<Shell appId="web">
+  <span class="hero-badge">{app.framework}</span>
+  <h1 class="hero-title">One site, many frameworks</h1>
+  <p class="hero-subtitle">
+    Every page on this site is served by a different web framework, stitched
+    together under one origin by a Hono reverse proxy that routes requests by
+    path prefix — with subdomain aliases like <code>start.…</code> redirecting
+    to <code>/start</code>. Navigation between them feels like a single
+    website.
+  </p>
+
+  <div class="card-grid">
+    {
+      SITE_APPS.filter((siteApp) => siteApp.id !== "web").map((siteApp) => (
+        <a
+          class="app-card"
+          href={appPath(siteApp)}
+          style={`--card-accent: ${siteApp.accent}`}
+        >
+          <h3>{siteApp.name}</h3>
+          <p>{siteApp.description}</p>
+        </a>
+      ))
+    }
+  </div>
+
+  <ul class="fact-list">
+    <li>
+      <span class="fact-label">Framework</span>
+      <code>{app.framework}</code>
+    </li>
+    <li>
+      <span class="fact-label">Canonical path</span>
+      <code>/</code>
+    </li>
+    <li>
+      <span class="fact-label">Dev port</span>
+      <code>{app.devPort}</code>
+    </li>
+  </ul>
+
+  <section class="api-demo">
+    <h2>Live data from the NestJS app</h2>
+    <p>
+      Fetched in the browser from the <code>api</code> subdomain — a different
+      framework, a different deployment, one site.
+    </p>
+    <pre data-api-demo>Loading…</pre>
+  </section>
+</Shell>

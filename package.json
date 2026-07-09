@@ -1,0 +1,22 @@
+{
+  "name": "turbo-multi-web-framework",
+  "description": "One website, a multiverse of web frameworks: a Turborepo monorepo where a Hono reverse proxy stitches multiple web framework apps into a single site.",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "prepare": "turbo run build --filter=./packages/*",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "prettier": "^3.7.4",
+    "turbo": "^2.10.4",
+    "typescript": "5.9.2"
+  },
+  "packageManager": "pnpm@11.8.0",
+  "engines": {
+    "node": ">=22.12"
+  }
+}
