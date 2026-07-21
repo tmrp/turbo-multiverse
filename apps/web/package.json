@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@repo/site-config": "workspace:*",
-    "astro": "^6.4.6"
+    "astro": "^7.1.0"
   },
   "devDependencies": {
     "vite": "^7.3.5"
